@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Profesor, Luis Carlos Santillan Hernandes -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirKarVan</title>
+    <link rel="shortcut icon" href="img/logo_sm.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="airkarvan.js"></script>
+    <script src="connection.js"></script>
+    <style>
+        .forms{ 
+            padding: 10px;
+            align-content: center;
+        }
+        .submit{
+            margin-inline: 150px;
+        }
+        .ropa{
+            margin-left: 10px;
+            margin-top: 20px;
+        }
+        .home{
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .content{
+            text-align: center; 
+            margin: 20px; 
+        }
+        .content_img{
+            text-align: center;
+        }
+        .content_user{
+            margin-top: -40px;
+
+        }
+
+    </style>
+</head>
+<body onload="getData()">
+    <!-- Home -->
+    <div data-role="page"  data-theme="a" id="home">
+        <div data-role="header" data-position="fixed" data-theme="b" style="overflow:hidden;">
+            <h1>AirKarVan</h1>
+        </div>
+        <div class="home">
+            <ul data-role="listview" data-position="fixed" data-theme="b" data-filter="true" data-filter-placeholder="Buscar..." id="productos" data-filter-theme="c" data-inset="true" >
+                <!--* Lista de productos -->
+            </ul>
+        </div>
+        <div align="center">
+            <footer>
+                <h4> <b> Integrantes: </b> <br>
+                    - Jacquez Rochin Karla De Jesus <br>
+                    - Velazquez Rodriguez Tessa Airam <br>
+                    - Inzunza Aguilar Cesar Yovanni
+                </h4>
+            </footer>
+        </div>
+        <div data-role="footer" data-tap-toggle="false" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="i1" class="ui-btn-b ui-btn-active" href="javascript:location.reload()" data-icon="home">Inicio</a></li>
+                    <li><a id="v1" class="ui-btn-b" data-transition="slide" href="#sale" data-icon="plus">Vender</a></li>
+                    <li><a id="p1" onclick="getUser(1)" class="ui-btn-b" data-transition="slide" href="#profile" data-icon="user">Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- sale -->
+    <div data-role="page" id="sale">
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>Agregar Producto</h1>
+        </div>
+        <form action="#" method="post">
+            <div class="ui-input-text forms ui-body-inherit">
+                <input type="text" required name="textinput-hide" id="textinput-hide" placeholder="Título del producto">
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-input-text forms ui-body-inherit ui-block-a">
+                    <input type="text" required maxlength="25" name="textinput-hide" id="textinput-hide" placeholder="Categoría">
+                </div>
+                <div class="ui-input-text forms ui-body-inherit ui-block-b">
+                    <input type="text" required maxlength="5" name="textinput-hide" id="textinput-hide" placeholder="Talla">
+                </div>
+                <div class="ui-input-text forms ui-body-inherit ui-block-c">
+                    <input type="number" required maxlength="6" name="textinput-hide" id="textinput-hide" placeholder="Precio">
+                </div>
+            </div>
+            <div class="ui-input-text forms ui-body-inherit">
+                <input type="text" required name="textinput-hide" maxlength="254" id="textinput-hide" placeholder="URL de la imagen del producto" >
+            </div>
+            <div class="forms ui-input-text ui-body-inherit">
+                <textarea autocapitalize="none" required maxlength="255" minlength="10" autocomplete="off" name="textarea-1" placeholder="Descipción general del producto" id="textarea-1"></textarea>
+            </div>
+            <div class="ui-field-contain submit">
+                <button type="submit" id="submit-8" class="ui-shadow ui-btn-b ui-btn ui-corner-all ui-mini">Publicar</button>
+            </div>
+        </form>
+        
+        <div data-role="footer" data-tap-toggle="false" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="i2" class="ui-btn-b" data-transition="slide" data-direction="reverse" data-tap-toggle="false" href="#home" data-icon="home">Inicio</a></li>
+                    <li><a id="v2"class="ui-btn-b ui-btn-active"  data-icon="plus">Vender</a></li>
+                    <li><a id="p2" onclick="getUser(1)" class="ui-btn-b" data-transition="slide" href="#profile" data-icon="user">Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- profile -->
+    <div data-role="page" id="profile">
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>Perfil</h1>
+        </div>
+        <div style="border: solid black 10px; margin: 50px;margin-top: 30px; margin-bottom: 10px; max-width: auto; max-height: auto;">
+            <p style="margin:5px;" class="content_img" id="data_img">
+                <img src="img/logo_sm.png" alt="" srcset="">
+            </p>
+        </div>
+        <br><br>
+            <div id="name" class="content_user ui-input-text forms ui-body-inherit">
+                <!-- username -->
+            </div>
+            <br><br>
+            <div id="email" class="content_user ui-input-text forms ui-body-inherit">
+                <!-- email -->
+            </div>
+            <br><br>
+            <div id="password" class="content_user ui-input-text forms ui-body-inherit">
+                <!-- password -->
+            </div>
+            <br><br>
+            <div class="content_user ui-input-text forms ui-body-inherit">
+                <input type="submit" required name="textinput-hide" id="textinput-hide" value="Editar Información">
+            </div>
+        <div data-role="footer" data-tap-toggle="false" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="i3" class="ui-btn-b" data-transition="slide" href="#home" data-direction="reverse" data-icon="home">Inicio</a></li>
+                    <li><a id="v3" class="ui-btn-b" data-transition="slide" href="#sale" data-direction="reverse" data-icon="plus">Vender</a></li>
+                    <li><a id="p3" onclick="getUser(1)" class="ui-btn-b ui-btn-active"  data-icon="user">Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Detalles -->
+    <div data-role="page" data-theme="b" id="producto">
+        <div data-role="header" data-position="" data-theme="b">
+            <h1>AirKarVan</h1>
+        </div>
+
+        <div id="content" class="ui-body ui-body-a ui-page-theme-b ui-corner-all">
+            <!-- contenido -->
+            <div class="content_submit"><input type="submit" class="" value="Comprar"></div>
+        </div>
+
+        <div data-role="footer" data-tap-toggle="false" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="i3" class="ui-btn-b" data-transition="flip" href="#home" data-direction="reverse" data-icon="back">Volver</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
